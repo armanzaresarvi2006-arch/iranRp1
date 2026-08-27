@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>بیمه و وام ایران RP</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Vazirmatn",Tahoma,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(50,150,255,.35),transparent 35%),
+        linear-gradient(145deg,#041537,#0751b8,#02132f);
+}
+
+.header{
+    text-align:center;
+    padding:48px 20px 25px;
+}
+
+.logo{
+    width:112px;
+    height:112px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:32px;
+    background:linear-gradient(145deg,#fff,#9edcff);
+    color:#0750b9;
+    font-size:50px;
+    font-weight:800;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35),
+        0 0 40px rgba(100,200,255,.35);
+}
+
+.company{
+    margin-top:20px;
+    font-size:31px;
+    font-weight:800;
+}
+
+.subtitle{
+    margin-top:8px;
+    color:#c9e4ff;
+    font-size:14px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:20px;
+}
+
+.main-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin:25px 0 45px;
+}
+
+.main-button{
+    min-height:225px;
+    border-radius:30px;
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(18px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.main-button:hover{
+    transform:translateY(-7px);
+    background:rgba(255,255,255,.17);
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.main-icon{
+    font-size:58px;
+    margin-bottom:14px;
+}
+
+.main-button h2{
+    font-size:28px;
+}
+
+.main-button p{
+    margin-top:8px;
+    color:#c8e2ff;
+}
+
+.section{
+    margin-bottom:60px;
+}
+
+.section-title{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+}
+
+.card{
+    padding:26px;
+    border-radius:23px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.17);
+    backdrop-filter:blur(16px);
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,.14);
+}
+
+.card h3{
+    font-size:21px;
+    margin-bottom:15px;
+}
+
+.amount{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:13px;
+}
+
+.info{
+    color:#c9e3ff;
+    font-size:14px;
+    line-height:2.1;
+}
+
+.button{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:0;
+    border-radius:13px;
+    background:#fff;
+    color:#0750b9;
+    font-family:inherit;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.button:hover{
+    background:#e5f5ff;
+    transform:scale(1.02);
+}
+
+.button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.calculator{
+    margin-top:28px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(0,0,0,.14);
+    border:1px solid rgba(255,255,255,.14);
+}
+
+.calculator h3{
+    margin-bottom:18px;
+}
+
+.input{
+    width:100%;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.15);
+    outline:none;
+    border-radius:13px;
+    background:rgba(255,255,255,.10);
+    color:#fff;
+    font-family:inherit;
+    font-size:15px;
+}
+
+.input::placeholder{
+    color:#b9d6f3;
+}
+
+.results{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+    margin-top:18px;
+}
+
+.result{
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.08);
+    color:#c8e2ff;
+    line-height:1.8;
+}
+
+.result strong{
+    display:block;
+    color:white;
+    font-size:18px;
+}
+
+.form-box{
+    display:none;
+    margin:35px 0;
+    padding:30px;
+    border-radius:26px;
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(18px);
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+
+.form-box.active{
+    display:block;
+    animation:formIn .3s ease;
+}
+
+@keyframes formIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.form-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.form-subtitle{
+    color:#c5e0ff;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group label{
+    font-size:14px;
+    color:#d9ebff;
+}
+
+.form-input{
+    width:100%;
+    padding:14px 15px;
+    border:1px solid rgba(255,255,255,.16);
+    outline:none;
+    border-radius:14px;
+    background:rgba(0,20,60,.35);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.form-input:focus{
+    border-color:#8bd4ff;
+    box-shadow:0 0 0 3px rgba(100,190,255,.1);
+}
+
+.form-input::placeholder{
+    color:#9ebbd8;
+}
+
+.form-actions{
+    display:flex;
+    gap:12px;
+    margin-top:22px;
+}
+
+.submit-button{
+    flex:1;
+    padding:14px;
+    border:0;
+    border-radius:14px;
+    background:#fff;
+    color:#0750b9;
+    font-family:inherit;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.cancel-button{
+    padding:14px 25px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    padding:35px 20px;
+}
+
+.success.active{
+    display:block;
+}
+
+.success-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:#0750b9;
+    font-size:35px;
+}
+
+.success h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.success p{
+    color:#cce5ff;
+    line-height:2;
+}
+
+.support{
+    margin-top:20px;
+    padding:30px;
+    border-radius:25px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.17);
+    backdrop-filter:blur(16px);
+    text-align:center;
+}
+
+.support h2{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.support p{
+    color:#c7e1ff;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.support-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.support-button{
+    display:block;
+    padding:14px;
+    border-radius:14px;
+    background:#fff;
+    color:#0750b9;
+    text-decoration:none;
+    font-weight:800;
+    transition:.2s;
+}
+
+.support-button:hover{
+    transform:translateY(-3px);
+    background:#e8f6ff;
+}
+
+.admin-open{
+    display:block;
+    width:100%;
+    max-width:500px;
+    margin:18px auto;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;
+    background:rgba(255,255,255,.09);
+    color:#fff;
+    font-family:inherit;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.admin-panel{
+    display:none;
+    margin:30px 0;
+    padding:28px;
+    border-radius:26px;
+    background:rgba(1,16,45,.92);
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.admin-panel.active{
+    display:block;
+}
+
+.admin-login{
+    max-width:400px;
+    margin:auto;
+    text-align:center;
+}
+
+.admin-login h2{
+    margin-bottom:20px;
+}
+
+.admin-content{
+    display:none;
+}
+
+.admin-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.refresh{
+    width:auto;
+    margin:0;
+    padding:10px 18px;
+}
+
+.admin-count{
+    margin-top:15px;
+    color:#c8e2ff;
+}
+
+.table-wrap{
+    overflow-x:auto;
+    margin-top:20px;
+}
+
+table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    text-align:right;
+}
+
+th{
+    background:rgba(255,255,255,.08);
+}
+
+.status-select{
+    padding:7px;
+    border:0;
+    border-radius:8px;
+    font-family:inherit;
+}
+
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#c8e2ff;
+}
+
+.notice{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#fff;
+    color:#0750b9;
+    padding:14px 25px;
+    border-radius:14px;
+    font-weight:700;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    display:none;
+    z-index:1000;
+    max-width:90%;
+    text-align:center;
+}
+
+.notice.show{
+    display:block;
+}
+
+.footer{
+    text-align:center;
+    padding:35px 20px;
+    color:#a9ccef;
+    font-size:12px;
+}
+
+@media(max-width:750px){
+
+    .main-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .support-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .form-actions{
+        flex-direction:column;
+    }
+
+    .company{
+        font-size:24px;
+    }
+
+    .main-button{
+        min-height:190px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">ق</div>
+
+    <div class="company">
+        بیمه و وام ایران RP
+    </div>
+
+    <div class="subtitle">
+        سامانه خدمات بیمه و وام
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- MAIN BUTTONS -->
+
+    <div class="main-buttons">
+
+        <div class="main-button" onclick="goTo('insurance')">
+
+            <div class="main-icon">🛡️</div>
+
+            <h2>بیمه</h2>
+
+            <p>مشاهده طرح‌های بیمه</p>
+
+        </div>
+
+
+        <div class="main-button" onclick="goTo('loans')">
+
+            <div class="main-icon">💰</div>
+
+            <h2>وام</h2>
+
+            <p>مشاهده طرح‌های وام</p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- REQUEST FORM -->
+
+    <div class="form-box" id="requestForm">
+
+
+        <div id="formContent">
+
+            <div class="form-title" id="formTitle">
+                ثبت درخواست
+            </div>
+
+            <div class="form-subtitle" id="formSubtitle">
+                اطلاعات خود را وارد کنید.
+            </div>
+
+
+            <form id="requestFormElement">
+
+                <div class="form-grid" id="formFields">
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                        id="submitBtn">
+
+                        ثبت درخواست
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeForm()">
+
+                        انصراف
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+        <div class="success" id="successBox">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                درخواست شما ثبت شد
+            </h2>
+
+            <p>
+                درخواست شما با موفقیت در سامانه ثبت شد.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INSURANCE -->
+
+    <section class="section" id="insurance">
+
+        <div class="section-title">
+            🛡️ طرح‌های بیمه
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    بیمه اقتصادی
+                </h3>
+
+                <div class="amount">
+                    190 سکه
+                </div>
+
+                <div class="info">
+                    پرداخت: 190 سکه<br>
+                    تعهد بیمه: 500,000 سکه<br>
+                    پوشش: خودرو و بدنه
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openInsuranceForm('بیمه اقتصادی')">
+
+                    انتخاب طرح
+
+                </button>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    بیمه استاندارد
+                </h3>
+
+                <div class="amount">
+                    90 سکه
+                </div>
+
+                <div class="info">
+                    پرداخت: 90 سکه<br>
+                    تعهد بیمه: 90,000 سکه<br>
+                    پوشش: تعمیرات خودرو
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openInsuranceForm('بیمه استاندارد')">
+
+                    انتخاب طرح
+
+                </button>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    بیمه حرفه‌ای
+                </h3>
+
+                <div class="amount">
+                    120 سکه
+                </div>
+
+                <div class="info">
+                    پرداخت: 120 سکه<br>
+                    تعهد بیمه: 20,000 سکه<br>
+                    پوشش: بدنه و رنگ
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openInsuranceForm('بیمه حرفه‌ای')">
+
+                    انتخاب طرح
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LOANS -->
+
+    <section class="section" id="loans">
+
+        <div class="section-title">
+            💰 طرح‌های وام
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    وام اقتصادی 90K
+                </h3>
+
+                <div class="amount">
+                    90,000 سکه
+                </div>
+
+                <div class="info">
+                    مبلغ دریافتی: 90,000 سکه<br>
+                    سود کل: 1,000 سکه<br>
+                    بازپرداخت کل: 91,000 سکه<br>
+                    حداقل قسط: 2,000 سکه
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openLoanForm('وام اقتصادی 90K')">
+
+                    درخواست وام
+
+                </button>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    وام استاندارد 150K
+                </h3>
+
+                <div class="amount">
+                    150,000 سکه
+                </div>
+
+                <div class="info">
+                    مبلغ دریافتی: 150,000 سکه<br>
+                    سود کل: 2,000 سکه<br>
+                    بازپرداخت کل: 152,000 سکه<br>
+                    حداقل قسط: 2,000 سکه
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openLoanForm('وام استاندارد 150K')">
+
+                    درخواست وام
+
+                </button>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    وام ویژه 250K
+                </h3>
+
+                <div class="amount">
+                    250,000 سکه
+                </div>
+
+                <div class="info">
+                    مبلغ دریافتی: 250,000 سکه<br>
+                    سود کل: 5,000 سکه<br>
+                    بازپرداخت کل: 255,000 سکه<br>
+                    حداقل قسط: 2,000 سکه
+                </div>
+
+                <button
+                    class="button"
+                    onclick="openLoanForm('وام ویژه 250K')">
+
+                    درخواست وام
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CALCULATOR -->
+
+        <div class="calculator">
+
+            <h3>
+                🧮 محاسبه وام
+            </h3>
+
+
+            <input
+                class="input"
+                id="loanAmount"
+                type="number"
+                placeholder="مثلاً 90000 سکه وارد کنید"
+                oninput="calculateLoan()"
+            >
+
+
+            <div class="results">
+
+
+                <div class="result">
+
+                    مبلغ وام
+
+                    <strong id="loanResult">
+                        0 سکه
+                    </strong>
+
+                </div>
+
+
+                <div class="result">
+
+                    سود کل
+
+                    <strong id="profitResult">
+                        0 سکه
+                    </strong>
+
+                </div>
+
+
+                <div class="result">
+
+                    بازپرداخت کل
+
+                    <strong id="totalResult">
+                        0 سکه
+                    </strong>
+
+                </div>
+
+
+                <div class="result">
+
+                    حداقل قسط
+
+                    <strong>
+                        2,000 سکه
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SUPPORT -->
+
+    <section class="support">
+
+        <h2>
+            🎧 پشتیبانی
+        </h2>
+
+        <p>
+            برای دریافت راهنمایی با پشتیبان‌های ما در روبیکا ارتباط بگیرید.
+        </p>
+
+
+        <div class="support-buttons">
+
+
+            <a
+                class="support-button"
+                href="https://rubika.ir/AnDrOs_pv"
+                target="_blank">
+
+                پشتیبان اول<br>
+                @AnDrOs_pv
+
+            </a>
+
+
+            <a
+                class="support-button"
+                href="https://rubika.ir/poshtiban_iranrp"
+                target="_blank">
+
+                پشتیبان دوم<br>
+                @poshtiban_iranrp
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- DATABASE TEST -->
+
+    <button
+        class="admin-open"
+        onclick="testDatabase()">
+
+        🔌 تست اتصال دیتابیس
+
+    </button>
+
+
+
+    <!-- ADMIN BUTTON -->
+
+    <button
+        class="admin-open"
+        onclick="toggleAdmin()">
+
+        ⚙️ پنل مدیریت
+
+    </button>
+
+
+
+    <!-- ADMIN PANEL -->
+
+    <div
+        class="admin-panel"
+        id="adminPanel">
+
+
+        <div
+            class="admin-login"
+            id="adminLogin">
+
+            <h2>
+                🔐 ورود به پنل مدیریت
+            </h2>
+
+
+            <input
+                class="form-input"
+                id="adminPassword"
+                type="password"
+                placeholder="رمز مدیریت"
+            >
+
+
+            <button
+                class="button"
+                onclick="loginAdmin()">
+
+                ورود
+
+            </button>
+
+        </div>
+
+
+
+        <div
+            class="admin-content"
+            id="adminContent">
+
+
+            <div class="admin-top">
+
+                <h2>
+                    📋 درخواست‌ها
+                </h2>
+
+
+                <button
+                    class="button refresh"
+                    onclick="loadRequests()">
+
+                    🔄 بروزرسانی
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="admin-count"
+                id="adminCount">
+
+            </div>
+
+
+            <div
+                class="table-wrap"
+                id="requestsBox">
+
+                <div class="empty">
+                    در حال دریافت...
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div
+    class="notice"
+    id="notice">
+</div>
+
+
+
+<footer class="footer">
+
+    بیمه و وام ایران RP
+
+    <br><br>
+
+    تمامی حقوق محفوظ است
+
+</footer>
+
+
+
+<script>
+
+
+/* ==========================================
+   SUPABASE SETTINGS
+========================================== */
+
+const SUPABASE_URL =
+"https://vpgxqbsuhqgrmxxdqsdr.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_C3D-tyDRoPGXlMRjDGZeLw_zzQnMVON";
+
+const REQUESTS_URL =
+SUPABASE_URL + "/rest/v1/requests";
+
+
+
+/* ==========================================
+   SUPABASE HEADERS
+========================================== */
+
+function supabaseHeaders(){
+
+    return {
+
+        "apikey":
+        SUPABASE_KEY,
+
+        "Authorization":
+        "Bearer " + SUPABASE_KEY,
+
+        "Content-Type":
+        "application/json"
+
+    };
+
+}
+
+
+
+/* ==========================================
+   NOTICE
+========================================== */
+
+let noticeTimer;
+
+function showNotice(message){
+
+    const notice =
+    document.getElementById("notice");
+
+    notice.innerText =
+    message;
+
+    notice.classList.add("show");
+
+    clearTimeout(noticeTimer);
+
+    noticeTimer =
+    setTimeout(
+        function(){
+
+            notice.classList.remove("show");
+
+        },
+        5000
+    );
+
+}
+
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+function goTo(id){
+
+    const element =
+    document.getElementById(id);
+
+    if(element){
+
+        element.scrollIntoView({
+            behavior:"smooth"
+        });
+
+    }
+
+}
+
+
+
+/* ==========================================
+   INSURANCE FORM
+========================================== */
+
+function openInsuranceForm(plan){
+
+    document.getElementById("formTitle")
+    .innerText =
+    "ثبت درخواست بیمه";
+
+
+    document.getElementById("formSubtitle")
+    .innerText =
+    "طرح انتخاب‌شده: " + plan;
+
+
+    document.getElementById("formFields")
+    .innerHTML = `
+
+        <div class="form-group">
+
+            <label>
+                نوع / مدل ماشین
+            </label>
+
+            <input
+                class="form-input"
+                name="car"
+                required
+                placeholder="مثلاً پژو 207">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                پلاک ماشین
+            </label>
+
+            <input
+                class="form-input"
+                name="plate"
+                required
+                placeholder="مثلاً 12 الف 345 ایران 11">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                نام داخل بازی
+            </label>
+
+            <input
+                class="form-input"
+                name="game_name"
+                required
+                placeholder="نام شما در بازی">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                نام کاربری روبیکا
+            </label>
+
+            <input
+                class="form-input"
+                name="rubika"
+                required
+                placeholder="@username">
+
+        </div>
+
+
+        <input
+            type="hidden"
+            name="request_type"
+            value="insurance">
+
+
+        <input
+            type="hidden"
+            name="plan"
+            value="${escapeAttribute(plan)}">
+
+    `;
+
+
+    showForm();
+
+}
+
+
+
+/* ==========================================
+   LOAN FORM
+========================================== */
+
+function openLoanForm(plan){
+
+    document.getElementById("formTitle")
+    .innerText =
+    "ثبت درخواست وام";
+
+
+    document.getElementById("formSubtitle")
+    .innerText =
+    "طرح انتخاب‌شده: " + plan;
+
+
+    document.getElementById("formFields")
+    .innerHTML = `
+
+        <div class="form-group">
+
+            <label>
+                شناسه داخل بازی
+            </label>
+
+            <input
+                class="form-input"
+                name="game_id"
+                required
+                placeholder="شناسه / ID داخل بازی">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                نام داخل بازی
+            </label>
+
+            <input
+                class="form-input"
+                name="game_name"
+                required
+                placeholder="نام شما در بازی">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                شماره همراه پاسخگو
+            </label>
+
+            <input
+                class="form-input"
+                name="phone"
+                type="tel"
+                required
+                placeholder="شماره همراه">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                آیدی روبیکا
+            </label>
+
+            <input
+                class="form-input"
+                name="rubika"
+                required
+                placeholder="@username">
+
+        </div>
+
+
+        <input
+            type="hidden"
+            name="request_type"
+            value="loan">
+
+
+        <input
+            type="hidden"
+            name="plan"
+            value="${escapeAttribute(plan)}">
+
+    `;
+
+
+    showForm();
+
+}
+
+
+
+/* ==========================================
+   SHOW FORM
+========================================== */
+
+function showForm(){
+
+    const box =
+    document.getElementById("requestForm");
+
+
+    document.getElementById("formContent")
+    .style.display =
+    "block";
+
+
+    document.getElementById("successBox")
+    .classList
+    .remove("active");
+
+
+    box.classList.add("active");
+
+
+    box.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+}
+
+
+
+/* ==========================================
+   CLOSE FORM
+========================================== */
+
+function closeForm(){
+
+    document.getElementById("requestForm")
+    .classList
+    .remove("active");
+
+}
+
+
+
+/* ==========================================
+   SUBMIT REQUEST
+========================================== */
+
+document
+.getElementById("requestFormElement")
+.addEventListener(
+"submit",
+async function(event){
+
+    event.preventDefault();
+
+
+    const button =
+    document.getElementById("submitBtn");
+
+
+    const formData =
+    new FormData(event.target);
+
+
+    const data = {
+
+        request_type:
+        formData.get("request_type"),
+
+        plan:
+        formData.get("plan"),
+
+        car:
+        formData.get("car") || null,
+
+        game_id:
+        formData.get("game_id") || null,
+
+        game_name:
+        formData.get("game_name") || null,
+
+        rubika:
+        formData.get("rubika") || null,
+
+        plate:
+        formData.get("plate") || null,
+
+        phone:
+        formData.get("phone") || null
+
+    };
+
+
+    if(
+        !data.request_type ||
+        !data.plan
+    ){
+
+        alert(
+            "نوع درخواست یا طرح مشخص نشده است."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled =
+    true;
+
+    button.innerText =
+    "در حال ثبت...";
+
+
+    try{
+
+        const controller =
+        new AbortController();
+
+
+        const timeout =
+        setTimeout(
+            function(){
+
+                controller.abort();
+
+            },
+            10000
+        );
+
+
+        const response =
+        await fetch(
+            REQUESTS_URL,
+            {
+                method:"POST",
+
+                headers:{
+                    ...supabaseHeaders(),
+
+                    "Prefer":
+                    "return=minimal"
+                },
+
+                body:
+                JSON.stringify(data),
+
+                signal:
+                controller.signal
+            }
+        );
+
+
+        clearTimeout(timeout);
+
+
+        const responseText =
+        await response.text();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " +
+                response.status +
+                "\n\n" +
+                responseText
+            );
+
+        }
+
+
+        document.getElementById(
+            "formContent"
+        ).style.display =
+        "none";
+
+
+        document.getElementById(
+            "successBox"
+        ).classList.add("active");
+
+
+        showNotice(
+            "✅ درخواست با موفقیت ثبت شد"
+        );
+
+
+        event.target.reset();
+
+
+    }catch(error){
+
+        console.error(
+            "SUPABASE ERROR:",
+            error
+        );
+
+
+        let errorText =
+        error.message;
+
+
+        if(
+            error.name ===
+            "AbortError"
+        ){
+
+            errorText =
+            "زمان اتصال به دیتابیس تمام شد.";
+
+        }
+
+
+        alert(
+            "❌ ثبت درخواست انجام نشد\n\n" +
+            errorText
+        );
+
+
+        showNotice(
+            "❌ ثبت درخواست انجام نشد"
+        );
+
+
+    }finally{
+
+        button.disabled =
+        false;
+
+        button.innerText =
+        "ثبت درخواست";
+
+    }
+
+});
+
+
+
+/* ==========================================
+   DATABASE TEST
+========================================== */
+
+async function testDatabase(){
+
+    showNotice(
+        "در حال تست دیتابیس..."
+    );
+
+
+    try{
+
+        const controller =
+        new AbortController();
+
+
+        const timeout =
+        setTimeout(
+            function(){
+
+                controller.abort();
+
+            },
+            8000
+        );
+
+
+        const response =
+        await fetch(
+            REQUESTS_URL +
+            "?select=*&limit=1",
+            {
+                method:"GET",
+
+                headers:
+                supabaseHeaders(),
+
+                signal:
+                controller.signal
+            }
+        );
+
+
+        clearTimeout(timeout);
+
+
+        const text =
+        await response.text();
+
+
+        if(response.ok){
+
+            alert(
+                "✅ اتصال به دیتابیس برقرار است.\n\n" +
+                "HTTP: " +
+                response.status
+            );
+
+
+            showNotice(
+                "✅ دیتابیس متصل است"
+            );
+
+        }else{
+
+            alert(
+                "❌ خطای دیتابیس\n\n" +
+                "HTTP: " +
+                response.status +
+                "\n\n" +
+                text
+            );
+
+        }
+
+
+    }catch(error){
+
+        alert(
+            "❌ اتصال برقرار نشد\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ADMIN
+========================================== */
+
+const ADMIN_PASSWORD =
+"IRANRP2026";
+
+
+function toggleAdmin(){
+
+    document
+    .getElementById("adminPanel")
+    .classList
+    .toggle("active");
+
+}
+
+
+
+function loginAdmin(){
+
+    const password =
+    document
+    .getElementById("adminPassword")
+    .value;
+
+
+    if(password !== ADMIN_PASSWORD){
+
+        showNotice(
+            "❌ رمز مدیریت اشتباه است"
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("adminLogin")
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById("adminContent")
+    .style.display =
+    "block";
+
+
+    loadRequests();
+
+}
+
+
+
+/* ==========================================
+   LOAD REQUESTS
+========================================== */
+
+async function loadRequests(){
+
+    const box =
+    document.getElementById(
+        "requestsBox"
+    );
+
+
+    const count =
+    document.getElementById(
+        "adminCount"
+    );
+
+
+    box.innerHTML =
+    `
+        <div class="empty">
+            در حال دریافت درخواست‌ها...
+        </div>
+    `;
+
+
+    try{
+
+        const response =
+        await fetch(
+            REQUESTS_URL +
+            "?select=*",
+            {
+                method:"GET",
+                headers:
+                supabaseHeaders()
+            }
+        );
+
+
+        const text =
+        await response.text();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " +
+                response.status +
+                "\n" +
+                text
+            );
+
+        }
+
+
+        const rows =
+        JSON.parse(text);
+
+
+        window.requestRows =
+        rows;
+
+
+        count.innerText =
+        "تعداد درخواست‌ها: " +
+        rows.length;
+
+
+        if(rows.length === 0){
+
+            box.innerHTML =
+            `
+                <div class="empty">
+                    هنوز درخواستی ثبت نشده.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        let html =
+        `
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>نوع درخواست</th>
+                    <th>طرح</th>
+                    <th>ماشین</th>
+                    <th>Game ID</th>
+                    <th>نام بازی</th>
+                    <th>روبیکا</th>
+                    <th>پلاک</th>
+                    <th>تلفن</th>
+                    <th>وضعیت</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+        `;
+
+
+        rows.forEach(
+        function(row,index){
+
+            html +=
+            `
+            <tr>
+
+                <td>
+                    ${safe(row.request_type)}
+                </td>
+
+                <td>
+                    ${safe(row.plan)}
+                </td>
+
+                <td>
+                    ${safe(row.car)}
+                </td>
+
+                <td>
+                    ${safe(row.game_id)}
+                </td>
+
+                <td>
+                    ${safe(row.game_name)}
+                </td>
+
+                <td>
+                    ${safe(row.rubika)}
+                </td>
+
+                <td>
+                    ${safe(row.plate)}
+                </td>
+
+                <td>
+                    ${safe(row.phone)}
+                </td>
+
+                <td>
+
+                    <select
+                        class="status-select"
+                        onchange="
+                        changeStatus(
+                            ${index},
+                            this.value
+                        )">
+
+                        <option
+                            value="pending"
+                            ${
+                                row.status === "pending"
+                                ? "selected"
+                                : ""
+                            }>
+
+                            pending
+
+                        </option>
+
+                        <option
+                            value="در حال بررسی"
+                            ${
+                                row.status === "در حال بررسی"
+                                ? "selected"
+                                : ""
+                            }>
+
+                            در حال بررسی
+
+                        </option>
+
+                        <option
+                            value="تأیید شد"
+                            ${
+                                row.status === "تأیید شد"
+                                ? "selected"
+                                : ""
+                            }>
+
+                            تأیید شد
+
+                        </option>
+
+                        <option
+                            value="رد شد"
+                            ${
+                                row.status === "رد شد"
+                                ? "selected"
+                                : ""
+                            }>
+
+                            رد شد
+
+                        </option>
+
+                    </select>
+
+                </td>
+
+            </tr>
+            `;
+
+        });
+
+
+        html +=
+        `
+            </tbody>
+        </table>
+        `;
+
+
+        box.innerHTML =
+        html;
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        box.innerHTML =
+        `
+            <div class="empty">
+
+                ❌ دریافت درخواست‌ها انجام نشد.
+
+                <br><br>
+
+                ${safe(error.message)}
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   CHANGE STATUS
+========================================== */
+
+async function changeStatus(
+    index,
+    newStatus
+){
+
+    const row =
+    window.requestRows[index];
+
+
+    if(!row){
+
+        return;
+
+    }
+
+
+    /*
+      اگر id در جدول وجود داشته باشد
+      از آن استفاده می‌کنیم.
+    */
+
+    let url =
+    REQUESTS_URL;
+
+
+    if(row.id){
+
+        url +=
+        "?id=eq." +
+        encodeURIComponent(row.id);
+
+    }else{
+
+        /*
+          چون id ممکن است در جدول نباشد،
+          از ترکیب فیلدهای اجباری استفاده می‌کنیم.
+        */
+
+        url +=
+        "?request_type=eq." +
+        encodeURIComponent(
+            row.request_type
+        ) +
+
+        "&plan=eq." +
+        encodeURIComponent(
+            row.plan
+        );
+
+    }
+
+
+    try{
+
+        const response =
+        await fetch(
+            url,
+            {
+                method:"PATCH",
+
+                headers:{
+                    ...supabaseHeaders(),
+
+                    "Prefer":
+                    "return=minimal"
+                },
+
+                body:
+                JSON.stringify({
+                    status:newStatus
+                })
+            }
+        );
+
+
+        const text =
+        await response.text();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " +
+                response.status +
+                "\n" +
+                text
+            );
+
+        }
+
+
+        showNotice(
+            "✅ وضعیت تغییر کرد"
+        );
+
+
+        loadRequests();
+
+
+    }catch(error){
+
+        alert(
+            "❌ تغییر وضعیت انجام نشد\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   LOAN CALCULATOR
+========================================== */
+
+function calculateLoan(){
+
+    const amount =
+    Number(
+        document
+        .getElementById(
+            "loanAmount"
+        )
+        .value
+    ) || 0;
+
+
+    const profit =
+    Math.max(
+        1000,
+        Math.round(
+            amount * 0.02
+        )
+    );
+
+
+    const total =
+    amount + profit;
+
+
+    document
+    .getElementById(
+        "loanResult"
+    )
+    .innerText =
+    amount.toLocaleString(
+        "en-US"
+    ) +
+    " سکه";
+
+
+    document
+    .getElementById(
+        "profitResult"
+    )
+    .innerText =
+    profit.toLocaleString(
+        "en-US"
+    ) +
+    " سکه";
+
+
+    document
+    .getElementById(
+        "totalResult"
+    )
+    .innerText =
+    total.toLocaleString(
+        "en-US"
+    ) +
+    " سکه";
+
+}
+
+
+
+/* ==========================================
+   SAFE TEXT
+========================================== */
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+
+/* ==========================================
+   SAFE ATTRIBUTE
+========================================== */
+
+function escapeAttribute(value){
+
+    return String(value)
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    );
+
+}
+
+</script>
+<script>
+const SUPABASE_URL = "https://vpgxqbsuhqgrmxxdqsdr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_C3D-tyDRoPGXlMRjDGZeLw_zzQnMVON";
+
+fetch(`${SUPABASE_URL}/rest/v1/requests?select=*&limit=1`, {
+    headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`
+    }
+})
+.then(async response => {
+    const text = await response.text();
+
+    console.log("HTTP STATUS:", response.status);
+    console.log("SUPABASE RESPONSE:", text);
+
+    if (response.ok) {
+        console.log("✅ اتصال به دیتابیس برقرار است");
+    } else {
+        console.log("❌ اتصال برقرار شد ولی دیتابیس خطا داد");
+    }
+})
+.catch(error => {
+    console.error("❌ اصلاً اتصال برقرار نشد:", error);
+});
+</script>
+</body>
+</html>
