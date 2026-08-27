@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>پنل مدیریت ایران RP</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Vazirmatn,Tahoma,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#174ca0,transparent 35%),
+    linear-gradient(145deg,#020b20,#063b8f,#02132f);
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.logo{
+    width:60px;
+    height:60px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:white;
+    color:#0750b9;
+    font-size:28px;
+    font-weight:800;
+}
+
+.title{
+    flex:1;
+}
+
+.title h1{
+    font-size:27px;
+}
+
+.title p{
+    color:#b9d9ff;
+    font-size:13px;
+    margin-top:4px;
+}
+
+.refresh{
+    border:0;
+    border-radius:12px;
+    padding:12px 18px;
+    background:white;
+    color:#0750b9;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    padding:22px;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.stat span{
+    color:#bcdcff;
+    font-size:13px;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    margin-top:8px;
+}
+
+.box{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:25px;
+}
+
+.box h2{
+    font-size:21px;
+    margin-bottom:18px;
+}
+
+.prices{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.price{
+    background:rgba(0,20,60,.4);
+    padding:18px;
+    border-radius:16px;
+}
+
+.price label{
+    display:block;
+    font-size:14px;
+    margin-bottom:9px;
+}
+
+.price input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+.save{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    background:white;
+    color:#0750b9;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.filters select{
+    padding:11px;
+    border-radius:10px;
+    background:#08275a;
+    color:white;
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.request{
+    background:rgba(0,20,60,.35);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:17px;
+    padding:18px;
+    margin-bottom:12px;
+}
+
+.request-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.plan{
+    font-weight:800;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:8px;
+    background:#526b87;
+    font-size:12px;
+}
+
+.info{
+    color:#c9e2ff;
+    font-size:13px;
+    line-height:2;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.actions button{
+    border:0;
+    border-radius:9px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.approve{
+    background:#fff;
+    color:#0750b9;
+}
+
+.reject{
+    background:#8b2635;
+    color:white;
+}
+
+.empty{
+    text-align:center;
+    color:#aac9ec;
+    padding:30px;
+}
+
+.notice{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    color:#0750b9;
+    padding:12px 22px;
+    border-radius:12px;
+    display:none;
+    font-weight:800;
+    z-index:10;
+}
+
+.notice.show{
+    display:block;
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .prices{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        align-items:flex-start;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-direction:column;
+    }
+
+    .refresh{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">ق</div>
+
+        <div class="title">
+            <h1>پنل مدیریت ایران RP</h1>
+            <p>مدیریت درخواست‌ها و قیمت‌ها</p>
+        </div>
+
+        <button class="refresh" onclick="loadAll()">
+            🔄 بروزرسانی
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>کل درخواست‌ها</span>
+            <strong id="total">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>در انتظار</span>
+            <strong id="pending">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>تأیید شده</span>
+            <strong id="approved">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>رد شده</span>
+            <strong id="rejected">0</strong>
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>💰 مدیریت قیمت‌ها</h2>
+
+        <div class="prices" id="prices">
+            در حال دریافت قیمت‌ها...
+        </div>
+
+        <button class="save" onclick="savePrices()">
+            💾 ذخیره قیمت‌ها
+        </button>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>📋 درخواست‌ها</h2>
+
+        <div class="filters">
+
+            <select id="filter" onchange="renderRequests()">
+                <option value="all">همه درخواست‌ها</option>
+                <option value="pending">در انتظار</option>
+                <option value="approved">تأیید شده</option>
+                <option value="rejected">رد شده</option>
+            </select>
+
+        </div>
+
+        <div id="requests">
+            در حال دریافت درخواست‌ها...
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="notice" id="notice"></div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://vpgxqbsuhqgrmxxdqsdr.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_C3D-tyDRoPGXlMRjDGZeLw_zzQnMVON";
+
+
+let allRequests = [];
+let allPrices = [];
+
+
+async function supabase(path, options={}){
+
+    const response = await fetch(
+        SUPABASE_URL + path,
+        {
+            ...options,
+            headers:{
+                "apikey":SUPABASE_KEY,
+                "Authorization":"Bearer "+SUPABASE_KEY,
+                "Content-Type":"application/json",
+                ...(options.headers || {})
+            }
+        }
+    );
+
+    const text = await response.text();
+
+    if(!response.ok){
+        throw new Error(text || "Supabase error");
+    }
+
+    return text ? JSON.parse(text) : null;
+}
+
+
+function notice(message){
+
+    const el = document.getElementById("notice");
+
+    el.innerText = message;
+    el.classList.add("show");
+
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },2500);
+}
+
+
+async function loadRequests(){
+
+    try{
+
+        allRequests = await supabase(
+            "/rest/v1/requests?select=*&order=created_at.desc"
+        );
+
+        updateStats();
+        renderRequests();
+
+    }catch(error){
+
+        console.error(error);
+
+        document.getElementById("requests").innerHTML =
+        `<div class="empty">
+            خطا در دریافت درخواست‌ها
+        </div>`;
+    }
+}
+
+
+function updateStats(){
+
+    document.getElementById("total").innerText =
+        allRequests.length;
+
+    document.getElementById("pending").innerText =
+        allRequests.filter(x => x.status === "pending").length;
+
+    document.getElementById("approved").innerText =
+        allRequests.filter(x => x.status === "approved").length;
+
+    document.getElementById("rejected").innerText =
+        allRequests.filter(x => x.status === "rejected").length;
+}
+
+
+function renderRequests(){
+
+    const container =
+        document.getElementById("requests");
+
+    const filter =
+        document.getElementById("filter").value;
+
+    let list = allRequests;
+
+    if(filter !== "all"){
+        list = list.filter(x => x.status === filter);
+    }
+
+    if(!list.length){
+
+        container.innerHTML =
+        `<div class="empty">
+            درخواستی پیدا نشد
+        </div>`;
+
+        return;
+    }
+
+    container.innerHTML = list.map((r,index)=>{
+
+        const status =
+            r.status || "pending";
+
+        return `
+        <div class="request">
+
+            <div class="request-head">
+
+                <div class="plan">
+                    ${escapeHTML(r.plan || "بدون پلن")}
+                </div>
+
+                <div class="status">
+                    ${escapeHTML(status)}
+                </div>
+
+            </div>
+
+            <div class="info">
+
+                نوع درخواست:
+                ${escapeHTML(r.request_type || r.type || "-")}
+                <br>
+
+                نام بازی:
+                ${escapeHTML(r.game_name || r.gameName || "-")}
+                <br>
+
+                شناسه:
+                ${escapeHTML(r.game_id || r.gameId || "-")}
+                <br>
+
+                ماشین:
+                ${escapeHTML(r.car || "-")}
+                <br>
+
+                پلاک:
+                ${escapeHTML(r.plate || "-")}
+                <br>
+
+                روبیکا:
+                ${escapeHTML(r.rubika || "-")}
+                <br>
+
+                تلفن:
+                ${escapeHTML(r.phone || "-")}
+
+            </div>
+
+            ${
+                status === "pending"
+                ?
+                `
+                <div class="actions">
+
+                    <button
+                        class="approve"
+                        onclick="changeStatus(${index},'approved')">
+                        ✅ تأیید
+                    </button>
+
+                    <button
+                        class="reject"
+                        onclick="changeStatus(${index},'rejected')">
+                        ❌ رد
+                    </button>
+
+                </div>
+                `
+                :
+                ""
+            }
+
+        </div>
+        `;
+
+    }).join("");
+}
+
+
+async function changeStatus(index,status){
+
+    const filter =
+        document.getElementById("filter").value;
+
+    const list =
+        filter === "all"
+        ? allRequests
+        : allRequests.filter(x=>x.status===filter);
+
+    const request = list[index];
+
+    if(!request) return;
+
+    try{
+
+        /*
+        اگر جدول شما id ندارد، از request_type
+        استفاده می‌کنیم.
+        */
+
+        const value =
+            request.request_type ||
+            request.type;
+
+        await supabase(
+            `/rest/v1/requests?request_type=eq.${encodeURIComponent(value)}`,
+            {
+                method:"PATCH",
+                headers:{
+                    "Prefer":"return=minimal"
+                },
+                body:JSON.stringify({
+                    status:status
+                })
+            }
+        );
+
+        notice(
+            status === "approved"
+            ? "درخواست تأیید شد ✅"
+            : "درخواست رد شد ❌"
+        );
+
+        await loadRequests();
+
+    }catch(error){
+
+        console.error(error);
+
+        notice("تغییر وضعیت انجام نشد ❌");
+    }
+}
+
+
+async function loadPrices(){
+
+    try{
+
+        allPrices = await supabase(
+            "/rest/v1/prices?select=*&order=id.asc"
+        );
+
+        renderPrices();
+
+    }catch(error){
+
+        console.error(error);
+
+        document.getElementById("prices").innerHTML =
+        "خطا در دریافت قیمت‌ها";
+    }
+}
+
+
+function renderPrices(){
+
+    document.getElementById("prices").innerHTML =
+        allPrices.map((p,index)=>`
+
+        <div class="price">
+
+            <label>
+                ${escapeHTML(p.title)}
+            </label>
+
+            <input
+                type="number"
+                min="0"
+                data-index="${index}"
+                value="${Number(p.price) || 0}"
+            >
+
+        </div>
+
+        `).join("");
+}
+
+
+async function savePrices(){
+
+    try{
+
+        const inputs =
+            document.querySelectorAll(".price input");
+
+        for(const input of inputs){
+
+            const index =
+                Number(input.dataset.index);
+
+            const price =
+                Number(input.value) || 0;
+
+            const item =
+                allPrices[index];
+
+            await supabase(
+                `/rest/v1/prices?id=eq.${item.id}`,
+                {
+                    method:"PATCH",
+                    headers:{
+                        "Prefer":"return=minimal"
+                    },
+                    body:JSON.stringify({
+                        price:price
+                    })
+                }
+            );
+        }
+
+        notice("قیمت‌ها ذخیره شدند ✅");
+
+        await loadPrices();
+
+    }catch(error){
+
+        console.error(error);
+
+        notice("ذخیره قیمت‌ها انجام نشد ❌");
+    }
+}
+
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+async function loadAll(){
+
+    await Promise.all([
+        loadRequests(),
+        loadPrices()
+    ]);
+
+}
+
+
+loadAll();
+
+</script>
+
+</body>
+</html>
